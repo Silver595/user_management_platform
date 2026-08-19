@@ -27,3 +27,10 @@ on:
             --report-path=/repo/gitleaks-report.json \
             --redact \
             --exit-code 0
+
+        - name: upload Git Leaks report
+          uses: actions/upload-artifact@v4
+          with:
+            name: gitleaks-report
+            path: gitleaks-report.json
+            if-no-files-found: warn
