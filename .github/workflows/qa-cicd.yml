@@ -39,7 +39,7 @@ jobs:
     name: Checkov Teraaform Scan
     runs-on: ubuntu-latest
     needs: gitleaks-scan
-    setps:
+    steps:
       - name: Chekout Source Code
         uses: actions/checkout@v4
       - name: Setup Python
