@@ -345,3 +345,5 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL}}
+      - name: "Example shoe sonar Qube Quality Gate Status Value"
+        run: echo "The Quality Gate Status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status}}"
