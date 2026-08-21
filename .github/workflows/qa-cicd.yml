@@ -416,7 +416,7 @@ jobs:
             which trivy
       - name: Run Trivy image Scan (Json)
         run: |
-            trivy image dancingsnake/usermangement:${{ github.sha }} \
+            trivy image dancingsnake/usermanagement:${{ github.sha }} \
             --format json
             --output image-trivy-report.json
             --severity HIGH,CRITICAL \
@@ -424,7 +424,7 @@ jobs:
             --exit-code 0
       - name: Run Trivy Image Scan (Table)
         run: |
-            trivy image dancingsnake/usermangement:${{ github.sha }} \
+            trivy image dancingsnake/usermanagement:${{ github.sha }} \
             --format table \
             --output image-trivy-table-report.txt
             --severity HIGH,CRITICAL \
