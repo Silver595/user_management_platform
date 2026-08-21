@@ -347,3 +347,29 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL}}
       - name: "Example shoe sonar Qube Quality Gate Status Value"
         run: echo "The Quality Gate Status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status}}"
+
+  client-build:
+    name: Client Build
+    runs-on: ubuntu:latest
+    needs: client-test
+
+    defaults:
+      run:
+        working-directory: client
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node Js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install client Dependencies
+        run: npm ci
+
+      - name: Build the Client
+        run: npm run build --if-present
