@@ -350,7 +350,7 @@ jobs:
 
   client-build:
     name: Client Build
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     needs: client-test
 
     defaults:
