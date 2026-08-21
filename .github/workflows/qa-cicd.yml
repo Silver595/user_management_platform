@@ -318,3 +318,29 @@ jobs:
       - name: Run Server test
         run: npm run test --if-present
         continue-on-error: true
+
+  sonarube:
+    name: Sonar Qube Analysis & Quality Gate Check
+    runs-on: ubuntu-latest
+    needs:
+     -  client-test
+     -  server-test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL}}
+
+      - name: sonarQube Quality Gate Status
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        with:
+          pollingTimeoutSec: 600
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN}}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL}}
