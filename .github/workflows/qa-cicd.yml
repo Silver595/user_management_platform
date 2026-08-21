@@ -9,7 +9,7 @@ on:
       - server/**
       - .github/workflows/qa-cicd.yml
       - sonar-project.properties # this is only for temp time of period
-      - Dockerfile # this is also for temp purpose
+      - Dockerfile # this is also for temp purpose ok
 
 jobs:
   gitleaks-scan:
