@@ -8,6 +8,7 @@ on:
       - client/**
       - server/**
       - .github/workflows/qa-cicd.yml
+      - sonar-project.properties # this is only for temp time of period
 
 jobs:
   gitleaks-scan:
