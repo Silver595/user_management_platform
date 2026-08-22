@@ -382,7 +382,9 @@ jobs:
 
   sbom-generation:
     runs-on: ubuntu-latest
-
+    needs:
+      - client-test
+      - server-test
     permissions: read-all
 
     steps:
