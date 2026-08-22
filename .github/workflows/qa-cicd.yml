@@ -437,6 +437,7 @@ jobs:
         uses: anchore/sbom-action@v0
         with:
           path: .
+          image: dancingsnake/usermanagement:${{ github.sha }}
           format: spdx.json
           output-file: image-sbom.spdx.json
           upload-artifact: true
