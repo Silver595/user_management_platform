@@ -429,7 +429,7 @@ jobs:
         uses: anchore/sbom-action@v0
         with:
           path: .
-          format: spdx.json
+          format: spdx-json
           output-file: source-sbom.spdx.json
           upload-artifact: true
 
@@ -437,7 +437,7 @@ jobs:
         uses: anchore/sbom-action@v0
         with:
           image: dancingsnake/usermanagement:${{ github.sha }}
-          format: spdx.json
+          format: spdx-json
           output-file: image-sbom.spdx.json
           upload-artifact: true
 
