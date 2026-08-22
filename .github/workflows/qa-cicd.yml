@@ -433,6 +433,13 @@ jobs:
           output-file: source-sbom.spdx.json
           upload-artifact: true
 
+      - name: Verify Dockerfile
+        run: |
+          pwd
+          ls -la
+          test -f Dockerfile
+          echo "✅ Dockerfile found"
+
       - name: Build Docker Image
         uses: docker/build-push-action@v7
         with:
