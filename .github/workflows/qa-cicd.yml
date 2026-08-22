@@ -424,11 +424,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
-        with:
-          context: .
-          push: false
-          load: true
-          tags: dancingsnake/usermanagement:${{ github.sha }}
 
       - name: Generate Source SBOM
         uses: anchore/sbom-action@v0
@@ -437,6 +432,18 @@ jobs:
           format: spdx-json
           output-file: source-sbom.spdx.json
           upload-artifact: true
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: false
+          load: true
+          tags: dancingsnake/usermanagement:${{ github.sha }}
+
+      - name: Verfiy Docker Image
+        run: |
+           docker image inspect dancingsnake/usermanagement:${{ github.sha }}
 
       - name: Generate Image SBOM
         uses: anchore/sbom-action@v0
