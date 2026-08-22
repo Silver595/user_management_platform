@@ -424,6 +424,11 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
+        with:
+          context: .
+          push: false
+          load: true
+          tags: dancingsnake/usermanagement:${{ github.sha }}
 
       - name: Generate Source SBOM
         uses: anchore/sbom-action@v0
