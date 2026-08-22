@@ -141,17 +141,19 @@ jobs:
           --format table \
           --severity HIGH,CRITICAL \
           --ignore-unfixed \
-          --exit-code 0 > client-trivy-fs-report.txt
+          --exit-code 0 > client-trivy-fs-report-table.txt
 
       - name: Upload Trivy Json report
         uses: actions/upload-artifact@v4
         with:
+          name: Uploaded Artifact of Client Trivy Json
           path: client-trivy-fs-report.json
           if-no-files-found: warn
 
       - name: Upload the Trivy Table report
         uses: actions/upload-artifact@v4
         with:
+          name: Uploaded Artifact of Client Trivy Table
           path: client-trivy-fs-report-table.txt
           if-no-files-found: warn
 
@@ -194,13 +196,15 @@ jobs:
       - name: Upload the Artifacts of Server (Json)
         uses: actions/upload-artifact@v4
         with:
+          name: Uploaded Artifact of server Json
           path: server-trivy-fs-report.json
           if-no-files-found: warn
 
       - name: Upload the Artifact of Server (Table)
         uses: actions/upload-artifact@v4
         with:
-          path: server-trivy-fs-report.txt
+          name: Uploaded Artifact of server Table
+          path: server-trivy-fs-report-table.txt
           if-no-files-found: warn
 
   client-lint:
