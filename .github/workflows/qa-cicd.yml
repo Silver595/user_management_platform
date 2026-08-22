@@ -146,11 +146,11 @@ jobs:
       - name: Upload Trivy Json report
         uses: actions/upload-artifact@v4
         with:
-          name: Uploaded Artifact of Client Trivy Json
+          name: Client Trivy Report (Json)
           path: client-trivy-fs-report.json
           if-no-files-found: warn
 
-      - name: Upload the Trivy Table report
+      - name: Client Trivy Table Report
         uses: actions/upload-artifact@v4
         with:
           name: Uploaded Artifact of Client Trivy Table
@@ -196,14 +196,14 @@ jobs:
       - name: Upload the Artifacts of Server (Json)
         uses: actions/upload-artifact@v4
         with:
-          name: Uploaded Artifact of server Json
+          name:  Server Trivy Json Report
           path: server-trivy-fs-report.json
           if-no-files-found: warn
 
       - name: Upload the Artifact of Server (Table)
         uses: actions/upload-artifact@v4
         with:
-          name: Uploaded Artifact of server Table
+          name: Server Trivy Table Report
           path: server-trivy-fs-report-table.txt
           if-no-files-found: warn
 
@@ -379,6 +379,29 @@ jobs:
       - name: Build the Client
         run: npm run build --if-present
         continue-on-error: true
+
+  sbom-generation:
+    runs-on: ubuntu-latest
+
+    permissions: read-all
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Generate SBOM with syft
+        uses: anchore/sbom-action@v0
+        with:
+          path: client
+          format: spdx-json
+          ouput-file: sbom.spdx.json
+
+      - name: Upload SBOM Client artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Client sbom-spdx
+          path: sbom.spdx.json
+          retention-days: 30
 
   docker:
     name: Docker file Run
