@@ -569,6 +569,10 @@ jobs:
     name: Deploy to k8s
     runs-on: ubuntu-latest
     needs: update-qa-manifest
+
+    permissions:
+      id-token: write
+      contents: read
     env:
       AWS_REGION: ap-south-1
       EKS_CLUSTER_NAME: my-cluster
@@ -582,10 +586,7 @@ jobs:
           ref: qa
         # This is for testing and tempory purpose only.I think this might help to detect the error
       - name: Debug GitHub OIDC
-        run: |
-          echo "Repository: $GITHUB_REPOSITORY"
-          echo "Ref: $GITHUB_REF"
-          echo "Ref name: $GITHUB_REF_NAME"
+        uses: github/actions-oidc-debugger@main
 
         # To check the OIDC configuration and the AWS credentials
       - name: Validate AWS Role Secret
