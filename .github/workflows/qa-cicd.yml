@@ -584,19 +584,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: qa
-        # This is for testing and tempory purpose only.I think this might help to detect the error
 
-        # To check the OIDC configuration and the AWS credentials
-      # - name: Validate AWS Role Secret
-      #   env:
-      #     AWS_ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-      #   run: |
-      #     if [[ "$AWS_ROLE" =~ ^arn:aws:iam::[0-9]{12}:role/.+$ ]]; then
-      #       echo "AWS_ROLE_TO_ASSUME has valid IAM role ARN format"
-      #     else
-      #       echo "AWS_ROLE_TO_ASSUME does NOT have valid IAM role ARN format"
-      #       exit 1
-      #     fi
       - name: Inspect OIDC claims
         run: |
           python3 - <<'PY'
