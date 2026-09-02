@@ -584,7 +584,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: qa
-
+# This test the OIDC claims
       - name: Inspect OIDC claims
         run: |
           python3 - <<'PY'
