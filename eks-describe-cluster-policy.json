@@ -5,7 +5,7 @@
       "Sid": "EKSDescribeCluster",
       "Effect": "Allow",
       "Action": ["eks:DescribeCluster"],
-      "Resource": "arn:aws:eks:ap-south-1:551322107788:cluster/my-cluster"
+      "Resource": "arn:aws:eks:ap-south-1:721717798813:cluster/my-cluster"
     }
   ]
 }

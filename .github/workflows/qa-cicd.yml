@@ -12,8 +12,8 @@ on:
       - Dockerfile # this is also for temp purpose ok
 
 permissions:
-  contents: write
-  id-token: read
+  contents: read
+  id-token: write
 
 jobs:
   gitleaks-scan:
