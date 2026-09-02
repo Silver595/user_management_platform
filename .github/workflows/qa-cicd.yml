@@ -11,6 +11,10 @@ on:
       - sonar-project.properties # this is only for temp time of period
       - Dockerfile # this is also for temp purpose ok
 
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   gitleaks-scan:
     name: GitLeak Scan
