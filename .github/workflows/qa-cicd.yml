@@ -551,7 +551,7 @@ jobs:
           ref: qa
       - name: Update Image tag in Manifest
         run: |
-          sed -i "s|image: dancingsnake/usermanagement:.*|image: dancingsnake/usermanagement:${{ github.sha }}|g" k8s-manifests/qa/app-deployment.yaml
+          sed -i "s|image: dancingsnake/usermanagement:.*|image: dancingsnake/usermanagement:${{ github.sha }}|g" k8-manifests/qa/app-deployment.yaml
       - name: Show Updated Manifest (Debug)
         run: cat k8s-manifests/qa/app-deployment.yaml
       - name: Commit and Push Updated Manifest
