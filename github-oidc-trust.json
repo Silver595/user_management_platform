@@ -12,7 +12,10 @@
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
         },
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": "repo:Silver595/user_management_platform:ref:refs/heads/qa"
+          "token.actions.githubusercontent.com:sub": [
+            "repo:Silver595/user_management_platform:ref:refs/heads/qa",
+            "repo:Silver595@175968824/user_management_platform@1339111804:ref:refs/heads/qa"
+          ]
         }
       }
     }
