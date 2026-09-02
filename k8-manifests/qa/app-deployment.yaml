@@ -17,7 +17,7 @@ spec:
       - name: regcred
       containers:
       - name: nodejs-app
-        image: dancingsnake/usermanagement:e7b6a0eb67036bffdb75ae4a0b0a8079bd81727f
+        image: dancingsnake/usermanagement:4669b457ec922007350095d6ab0e4d690813e846
         ports:
         - containerPort: 5000
         env:
