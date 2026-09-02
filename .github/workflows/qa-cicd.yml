@@ -553,11 +553,11 @@ jobs:
         run: |
           sed -i "s|image: dancingsnake/usermanagement:.*|image: dancingsnake/usermanagement:${{ github.sha }}|g" k8-manifests/qa/app-deployment.yaml
       - name: Show Updated Manifest (Debug)
-        run: cat k8s-manifests/qa/app-deployment.yaml
+        run: cat k8-manifests/qa/app-deployment.yaml
       - name: Commit and Push Updated Manifest
         run: |
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add k8s-manifests/qa/app-deployment.yaml
+            git add k8-manifests/qa/app-deployment.yaml
             git commit -m "Update image tag to ${{ github.sha }} [skip ci]" || echo "No Changes Commited"
             git push origin qa
