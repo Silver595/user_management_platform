@@ -588,16 +588,15 @@ jobs:
           echo "Ref name: $GITHUB_REF_NAME"
 
         # To check the OIDC configuration and the AWS credentials
-
-      - name: Check AWS Role Secret
+      - name: Validate AWS Role Secret
         env:
           AWS_ROLE: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         run: |
-          if [ -z "$AWS_ROLE" ]; then
-            echo "AWS_ROLE_TO_ASSUME is NOT set"
-            exit 1
+          if [[ "$AWS_ROLE" =~ ^arn:aws:iam::[0-9]{12}:role/.+$ ]]; then
+            echo "AWS_ROLE_TO_ASSUME has valid IAM role ARN format"
           else
-            echo "AWS_ROLE_TO_ASSUME is set"
+            echo "AWS_ROLE_TO_ASSUME does NOT have valid IAM role ARN format"
+            exit 1
           fi
 
       - name: Configure AWS Credentials Form github OIDC
