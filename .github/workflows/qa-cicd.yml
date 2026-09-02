@@ -597,6 +597,30 @@ jobs:
       #       echo "AWS_ROLE_TO_ASSUME does NOT have valid IAM role ARN format"
       #       exit 1
       #     fi
+      - name: Inspect OIDC claims
+        run: |
+          python3 - <<'PY'
+          import os, json, base64, urllib.request
+
+          req = urllib.request.Request(
+              os.environ["ACTIONS_ID_TOKEN_REQUEST_URL"] + "&audience=sts.amazonaws.com",
+              headers={
+                  "Authorization": "bearer " +
+                  os.environ["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]
+              }
+          )
+
+          token = json.load(urllib.request.urlopen(req))["value"]
+
+          payload = token.split(".")[1]
+          payload += "=" * (-len(payload) % 4)
+
+          claims = json.loads(base64.urlsafe_b64decode(payload))
+
+          for key in ("iss", "aud", "sub", "repository", "repository_id",
+                      "repository_owner", "repository_owner_id", "ref", "environment"):
+              print(f"{key}: {claims.get(key)}")
+          PY
 
       - name: Configure AWS Credentials Form github OIDC
         uses: aws-actions/configure-aws-credentials@v4
